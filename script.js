@@ -1,18 +1,54 @@
 import BouncingBall from "./BouncingBall.js";
 // Example usage:
 const canvas = document.querySelector("canvas");
-const ball1 = new BouncingBall(100, 100, 20, "blue", canvas, { x: 3, y: 4 });
-const ball2 = new BouncingBall(100, 100, 20, "red", canvas, { x: 4, y: -8 });
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+const generateOneBall = () => {
+  const radius = 30;
+
+  let x = Math.round(Math.random() * canvas.width);
+  let y = Math.round(Math.random() * canvas.height);
+  if (x < radius) x += radius;
+  else if (x > canvas.width - radius) x -= radius;
+  else x = x;
+  if (y < radius) y += radius;
+  else if (y > canvas.height - radius) y -= radius;
+  else y = y;
+
+  const ball = new BouncingBall(
+    x,
+    y,
+    radius,
+    getRandomRgb(),
+    canvas,
+    Math.random() * 5,
+    Math.random() * 3
+  );
+  return ball;
+};
+
+function getRandomRgb() {
+  const r = Math.round(Math.random() * 255);
+  const g = Math.round(Math.random() * 255);
+  const b = Math.round(Math.random() * 255);
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+const balls = [];
+for (let i = 0; i < 100; i++) {
+  const newBall = generateOneBall();
+  balls.push(newBall);
+}
+console.log(balls);
+
 function gameLoop() {
-  ball1.context.clearRect(0, 0, canvas.width, canvas.height);
-  ball1.draw();
-  ball1.draw();
-  ball2.draw();
-  ball2.update();
-  ball1.update();
+  balls.map((ball) =>
+    ball.context.clearRect(0, 0, canvas.width, canvas.height)
+  );
+  balls.map((ball) => ball.draw());
+  balls.map((ball) => ball.update());
   requestAnimationFrame(gameLoop);
 }
 

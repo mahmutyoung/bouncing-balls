@@ -1,12 +1,13 @@
 export default class BouncingBall {
-    constructor(x, y, radius, color, canvas, velocity) {
+    constructor(x, y, radius, color, canvas, vx, vy) {
       this.x = x;
       this.y = y;
       this.radius = radius;
       this.color = color;
       this.canvas = canvas;
       this.context = this.canvas.getContext("2d");
-      this.velocity = {x: velocity.x, y: velocity.y};
+      this.vx=vx;
+      this.vy=vy;
     }
   
     draw() {
@@ -19,13 +20,13 @@ export default class BouncingBall {
   
     update() {
       if (this.x + this.radius > this.canvas.width || this.x - this.radius < 0) {
-        this.velocity.x = -this.velocity.x;
+        this.vx = -this.vx;
       }
       if (this.y + this.radius > this.canvas.height || this.y - this.radius < 0) {
-        this.velocity.y = -this.velocity.y;
+        this.vy = -this.vy;
       }
-      this.x += this.velocity.x;
-      this.y += this.velocity.y;
+      this.x += this.vx;
+      this.y += this.vy;
     }
   }
   
