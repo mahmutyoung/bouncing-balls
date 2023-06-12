@@ -1,11 +1,17 @@
 import BouncingBall from "./BouncingBall.js";
-// Example usage:
+
 const canvas = document.querySelector("canvas");
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
 const generateOneBall = () => {
-  const radius = 200*Math.random();
+  const radius = 200 * Math.random();
 
   let x = Math.round(Math.random() * canvas.width);
   let y = Math.round(Math.random() * canvas.height);
@@ -41,15 +47,13 @@ for (let i = 0; i < 100; i++) {
   const newBall = generateOneBall();
   balls.push(newBall);
 }
-console.log(balls);
 
 function gameLoop() {
-  balls.map((ball) =>
-    ball.context.clearRect(0, 0, canvas.width, canvas.height)
-  );
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   balls.map((ball) => ball.update());
   balls.map((ball) => ball.draw());
-  
+
   requestAnimationFrame(gameLoop);
 }
 
