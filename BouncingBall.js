@@ -5,7 +5,7 @@ export default class BouncingBall {
     this.radius = radius;
     this.color = color;
     this.canvas = canvas;
-    this.context = this.canvas.getContext("2d");
+    this.context = this.canvas.getContext('2d');
     this.vx = vx;
     this.vy = vy;
   }

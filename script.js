@@ -1,17 +1,17 @@
-import BouncingBall from "./BouncingBall.js";
+import BouncingBall from './BouncingBall.js';
 
-const canvas = document.querySelector("canvas");
-const ctx = canvas.getContext("2d");
+const canvas = document.querySelector('canvas');
+const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-window.addEventListener("resize", () => {
+window.addEventListener('resize', () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 });
 
 const generateOneBall = () => {
-  const radius = 150 * Math.random();
+  const radius = 20 * Math.random();
 
   let x = Math.round(Math.random() * canvas.width);
   let y = Math.round(Math.random() * canvas.height);
@@ -43,7 +43,7 @@ function getRandomRgb() {
 }
 
 const balls = [];
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 10; i++) {
   const newBall = generateOneBall();
   balls.push(newBall);
 }
